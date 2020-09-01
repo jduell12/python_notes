@@ -37,7 +37,7 @@ Model online store in Python
     - Purchases have products (one to many)
 """
 
-# User class
+from datetime import datetime
 
 
 class User:
@@ -45,25 +45,61 @@ class User:
         self.name = name
         self.is_admin = is_admin
 
-# Customer Class - inherits from User
 
-
-class Customer(User):
+class Customer(User):  # inherits from User
     def __init__(self, name):
         super().__init__(name)
         self.purchases = []
 
-# Vendor Class - inherits from User
+    def purchase_product(self, product):
+        purchase = Purchase(product, self)
+        self.purchases.append(purchase)
 
 
-class Vendor(User):
+class Vendor(User):  # inherits from User
     def __init__(self, name):
         super().__init__(name)
         self.products = []
 
-# Admin Class - inherits from User
+    def create_product(self, product_name, product_price):
+        product = Product(self, product_name, product_price)
+        self.products.append(product)
 
 
 class Admin(User):
-    def __init__(self, name):
+    def __init__(self, name):  # inherits from User
         super().__init__(name, is_admin=True)
+
+
+class Product:
+    def __init__(self, name, price, vendor):
+        self.name = name
+        self.price = price
+        self.vendor = vendor
+
+
+class Purchase:
+    def __init__(self, product, customer):
+        self.product = product
+        self.customer = customer
+        self.purchase_price = product.price
+        self.purchase_date = datetime.now()
+
+####################################################################
+
+
+class Student:
+    def __init__(self, first_name, last_name):  # initializes object
+        self.first_name = first_name
+        self.last_name = last_name
+
+    def __str__(self):  # prints out easily readable object
+        return 'Student: %s %s' % (self.first_name, self.last_name)
+
+    def __repr__(self):  # returns 'offical' string rep of object
+        return 'Student(first_name = %s, last_name = %s)' % (self.first_name, self.last_name)
+
+
+student = Student('Jessica', 'Duell')
+print(student.first_name, student.last_name)
+print(student)
