@@ -44,3 +44,26 @@ class User:
     def __init__(self, name, is_admin=False):
         self.name = name
         self.is_admin = is_admin
+
+# Customer Class - inherits from User
+
+
+class Customer(User):
+    def __init__(self, name):
+        super().__init__(name)
+        self.purchases = []
+
+# Vendor Class - inherits from User
+
+
+class Vendor(User):
+    def __init__(self, name):
+        super().__init__(name)
+        self.products = []
+
+# Admin Class - inherits from User
+
+
+class Admin(User):
+    def __init__(self, name):
+        super().__init__(name, is_admin=True)
