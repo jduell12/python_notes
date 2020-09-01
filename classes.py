@@ -26,11 +26,16 @@ self keyword --> indicates class-level variable
 
 
 class Animal:
-    def __init(self, name, hunger, diet):
+    def __init__(self, name, hunger, diet):
         self.name = name
         self.hunger = hunger
         self.diet = diet
 
     def eat(self, food):
-        if food > 0 and hunger < 25:
-            hunger += food
+        if food > 0 and self.hunger < 25:
+            self.hunger += food
+
+
+cat = Animal('Rukia', 10, 'Tuna')
+cat.eat(2)
+print(cat.hunger)
